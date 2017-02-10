@@ -1,0 +1,136 @@
+<template class="body">
+	<div>
+		<div class="tab">
+			<div class="tab-box">
+				<div class="tab-item" repeat="(i,item) in items" index="{{i}}" onClick="tabClick">
+					<div class="tab-inner tab{{i}}"><text class="{{item.style}}">{{item.text}}</text></div>
+				</div>
+			</div>
+			<div class="tab-side" id="slider"></div>
+		</div>
+		<div class="cnt" id="cnt">
+			<div class="view view1"><text>Tab 1</text></div>
+			<div class="view view2"><text>Tab 2</text></div>
+		</div>
+	</div>
+</template>
+<style>
+	.tab{
+		flex-direction:column;
+		justify-content:flex-end;
+		height: 110;
+		border-bottom-width: 2px;
+		border-color: #CCC;
+		background-color: #FFF;
+	}
+	.tab-box{
+		flex-direction:row;
+	}
+	.tab-item{
+		flex:1;
+		flex-direction:column;
+		justify-content:center;
+		height:100;
+		padding-top: 10;
+	}
+	.tab-inner{
+		height: 55;
+		justify-content:center;
+		align-items:center;
+		border-color: #CCC;
+	}
+	.tab0{
+		border-right-width: 1px;
+	}
+	.tab1{
+		border-left-width: 1px;
+	}
+	.tab-side{
+		width: 375;
+		height: 6;
+		background-color: #F50;
+	}
+	.normal{
+		color:#444;
+		font-size: 34;
+	}
+	.selected{
+		color:#F50;
+		font-size: 39;
+	}
+	.cnt{
+		flex-direction:row;
+	}
+	.view{
+		width: 750;
+		height: 500;
+		justify-content:center;
+		align-items:center;
+	}
+	.view1{
+		background-color: #AADFF8;
+	}
+	.view2{
+		background-color: pink;
+	}
+</style>
+<script>
+    require('weex-components');
+    var modal = require('@weex-module/modal');
+    var animation = require('@weex-module/animation');
+
+    module.exports = {
+        data: {
+        	items:[{
+        		text:'Tab1',
+        		style:'selected'
+        	},{
+        		text:'Tab2',
+        		style:'normal'
+        	}],
+        	crrTab:0
+        },
+        methods: {
+        	slide:function(a){
+        		animation.transition(this.$el("slider"),{
+					styles:{
+			            transform: 'translate('+ a +', 0)'
+					},
+					duration:100,
+					timingFunction: 'ease-in-out',
+					delay: 0 //ms
+				},function(){});
+        	},
+        	tabSlide:function(a){
+        		animation.transition(this.$el("cnt"),{
+        			styles:{
+        				transform: 'translate(' + a + ', 0)'
+        			},
+        			duration:100,
+        			timingFunction:'linear',
+        			delay:0
+        		},function(){});
+        	},
+        	switchTab:function(){
+        		var i = this.crrTab,
+        			j = i;
+        		i = i == 0 ? 1 : 0;
+        		this.crrTab = i;
+        		this.items[j].style = 'normal';
+        		this.items[i].style = 'selected';
+        	},
+        	tabClick:function(e){
+        		var eTarget = e.target.attr.index;
+        		if(eTarget != this.crrTab){
+        			var slideTemp = this.crrTab == 0 ? '100%' : 0,
+        				tabSlideTemp = '-' + slideTemp;
+        			this.slide(slideTemp);
+        			this.tabSlide(tabSlideTemp);
+        			this.switchTab();
+        		}
+        	}
+        },
+        created: function(){
+        }
+    }
+</script>

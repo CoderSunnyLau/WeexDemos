@@ -1,0 +1,56 @@
+<template>
+	<wxc-navpage class="body" data-role="none" height={{navBarHeight}} background-color="deeppink" title="點讚" title-color="white">
+			<list>
+				<cell class="list-panel" repeat="(i,item) in items">
+						<div onclick="like"><image class="like-pic" src={{item.src}}>{{i}}</image></div>
+			    </cell>
+			</list>
+	</wxc-navpage>
+</template>
+<script>
+    require('weex-components');
+
+	module.exports={
+		data: {
+			navBarHeight:150,
+			items:[]
+		},
+		methods: {
+            like: function(e){
+            	var i = e.target.attr.value;
+            	if(this.items[i].like == "true"){
+            		this.items[i].src = "http://os.ittun.com/Public/images/index/dianzan.png";
+            		this.items[i].like = "false";
+            	}else{
+	            	this.items[i].src = "http://os.ittun.com/Public/images/index/dianzan-s.png";
+	            	this.items[i].like = "true";
+	            }
+            }
+		},
+		created: function(){
+            for(var i = 0; i < 3; i++){
+            	this.items.push({"src":"http://os.ittun.com/Public/images/index/dianzan.png","like":"false"});
+            }
+        }
+	}
+</script>
+<style>
+.body{
+	background-color: #DDD;
+}
+.list-panel{
+	flex-direction:column;
+	justify-content:flex-end;
+	align-items:flex-end;
+	background-color: #F4F4F4;
+	border-bottom-width: 30;
+	border-color: #DDD;
+	padding-bottom: 10;
+	height: 200;
+}
+.like-pic{
+	width: 55;
+	height: 55;
+	margin-right: 50;
+}
+</style>
