@@ -268,12 +268,12 @@
 	    login: function login() {
 	      var vm = this;
 
-	      // 鐧诲綍鏍￠獙
+	      // 登录校验
 	      if (vm.userName == '') {
-	        vm.warningMsg = '璇疯緭鍏ョ敤鎴跺悕';
+	        vm.warningMsg = '请输入用戶名';
 	        return false;
 	      } else if (vm.password == '') {
-	        vm.warningMsg = '璇疯緭鍏ュ瘑鐮�';
+	        vm.warningMsg = '请输入密码';
 	        return false;
 	      } else {
 	        vm.warningMsg = '';
@@ -281,7 +281,7 @@
 
 	      var psd = (0, _md2.default)(vm.password);
 	      // console.log(psd);
-	      // 鐧诲綍
+	      // 登录
 	      stream.fetch({
 	        method: 'GET',
 	        type: 'json',
@@ -289,15 +289,15 @@
 	      }, function (res) {
 	        if (res.ok) {
 	          if (res.data.success) {
-	            // 鐧诲綍鎴愬姛
-	            vm.warningMsg = '鐧诲綍鎴愬姛';
+	            // 登录成功
+	            vm.warningMsg = '登录成功';
 	            storage.setItem('serviceId', res.data._serviceId, function (event) {
 	              storage.getItem('serviceId', function (event) {
 	                console.log('get value:', event.data);
 	              });
 	            });
 
-	            // 椤甸潰璺宠浆
+	            // 页面跳转
 	            var url = vm.$getConfig().bundleUrl;
 	            url = url.split('/').slice(0, -1).join('/') + '/account.weex.js';
 	            var params = {
@@ -306,11 +306,11 @@
 	            };
 	            navigator.push(params, function () {});
 	          } else {
-	            // 鐧诲綍澶辫触
+	            // 登录失败
 	            vm.warningMsg = res.data.message;
 	          }
 	        } else {
-	          vm.warningMsg = '缃戠粶閿欒';
+	          vm.warningMsg = '网络错误';
 	        }
 	      });
 	    }
@@ -627,7 +627,7 @@
 	    staticClass: ["input"],
 	    attrs: {
 	      "type": "text",
-	      "placeholder": "鐢ㄦ埗鍚�",
+	      "placeholder": "用戶名",
 	      "value": (_vm.userName)
 	    },
 	    on: {
@@ -641,7 +641,7 @@
 	    staticClass: ["input"],
 	    attrs: {
 	      "type": "password",
-	      "placeholder": "瀵嗙⒓",
+	      "placeholder": "密碼",
 	      "value": (_vm.password)
 	    },
 	    on: {
@@ -656,7 +656,7 @@
 	    }
 	  }, [_c('text', {
 	    staticClass: ["login-text"]
-	  }, [_vm._v("绔嬪嵆鐧诲綍")])])])
+	  }, [_vm._v("立即登录")])])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
