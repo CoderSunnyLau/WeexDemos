@@ -56,6 +56,10 @@
 
 	var _login2 = _interopRequireDefault(_login);
 
+	var _foo = __webpack_require__(9);
+
+	var _foo2 = _interopRequireDefault(_foo);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_login2.default.el = '#root';
@@ -264,12 +268,12 @@
 	    login: function login() {
 	      var vm = this;
 
-	      // 登录校验
+	      // 鐧诲綍鏍￠獙
 	      if (vm.userName == '') {
-	        vm.warningMsg = '请输入用戶名';
+	        vm.warningMsg = '璇疯緭鍏ョ敤鎴跺悕';
 	        return false;
 	      } else if (vm.password == '') {
-	        vm.warningMsg = '请输入密码';
+	        vm.warningMsg = '璇疯緭鍏ュ瘑鐮�';
 	        return false;
 	      } else {
 	        vm.warningMsg = '';
@@ -277,7 +281,7 @@
 
 	      var psd = (0, _md2.default)(vm.password);
 	      // console.log(psd);
-	      // 登录
+	      // 鐧诲綍
 	      stream.fetch({
 	        method: 'GET',
 	        type: 'json',
@@ -285,31 +289,34 @@
 	      }, function (res) {
 	        if (res.ok) {
 	          if (res.data.success) {
-	            // 登录成功
-	            vm.warningMsg = '登录成功';
+	            // 鐧诲綍鎴愬姛
+	            vm.warningMsg = '鐧诲綍鎴愬姛';
 	            storage.setItem('serviceId', res.data._serviceId, function (event) {
-	              // storage.getItem('serviceId', event => {
-	              //   console.log('get value:', event.data);
-	              // });
+	              storage.getItem('serviceId', function (event) {
+	                console.log('get value:', event.data);
+	              });
 	            });
 
-	            // 页面跳转
+	            // 椤甸潰璺宠浆
 	            var url = vm.$getConfig().bundleUrl;
-	            url = url.split('/').slice(0, -1).join('/') + '/myAccount.weex.js';
+	            url = url.split('/').slice(0, -1).join('/') + '/account.weex.js';
 	            var params = {
-	              'url': url,
+	              'url': 'https://codersunnylau.github.io/WeexDemos/js/myAccount.weex.js',
 	              'animated': 'true'
 	            };
 	            navigator.push(params, function () {});
 	          } else {
-	            // 登录失败
+	            // 鐧诲綍澶辫触
 	            vm.warningMsg = res.data.message;
 	          }
 	        } else {
-	          vm.warningMsg = '网络错误';
+	          vm.warningMsg = '缃戠粶閿欒';
 	        }
 	      });
 	    }
+	  },
+	  created: function created() {
+	    console.log("start");
 	  }
 	};
 
@@ -620,7 +627,7 @@
 	    staticClass: ["input"],
 	    attrs: {
 	      "type": "text",
-	      "placeholder": "用戶名",
+	      "placeholder": "鐢ㄦ埗鍚�",
 	      "value": (_vm.userName)
 	    },
 	    on: {
@@ -634,7 +641,7 @@
 	    staticClass: ["input"],
 	    attrs: {
 	      "type": "password",
-	      "placeholder": "密碼",
+	      "placeholder": "瀵嗙⒓",
 	      "value": (_vm.password)
 	    },
 	    on: {
@@ -649,7 +656,126 @@
 	    }
 	  }, [_c('text', {
 	    staticClass: ["login-text"]
-	  }, [_vm._v("立即登录")])])])
+	  }, [_vm._v("绔嬪嵆鐧诲綍")])])])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = []
+
+	/* styles */
+	__vue_styles__.push(__webpack_require__(10)
+	)
+
+	/* script */
+	__vue_exports__ = __webpack_require__(11)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(12)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "D:\\weex\\weex-demo\\src\\foo.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-53250b8e"
+	__vue_options__.style = __vue_options__.style || {}
+	__vue_styles__.forEach(function (module) {
+	  for (var name in module) {
+	    __vue_options__.style[name] = module[name]
+	  }
+	})
+	if (typeof __register_static_styles__ === "function") {
+	  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+	}
+
+	module.exports = __vue_exports__
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+	module.exports = {
+	  "wrapper": {
+	    "alignItems": "center",
+	    "marginTop": 120
+	  },
+	  "title": {
+	    "fontSize": 48
+	  },
+	  "logo": {
+	    "width": 360,
+	    "height": 82
+	  }
+	}
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	exports.default = {
+	  data: {
+	    logoUrl: 'https://alibaba.github.io/weex/img/weex_logo_blue@3x.png',
+	    target: 'World'
+	  },
+	  methods: {
+	    update: function update(e) {
+	      this.target = 'Weex';
+	      console.log('target:', this.target);
+	    }
+	  }
+	};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: ["wrapper"],
+	    on: {
+	      "click": _vm.update
+	    }
+	  }, [_c('image', {
+	    staticClass: ["logo"],
+	    attrs: {
+	      "src": _vm.logoUrl
+	    }
+	  }), _c('text', {
+	    staticClass: ["title"]
+	  }, [_vm._v("Hello " + _vm._s(_vm.target))])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
